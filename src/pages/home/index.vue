@@ -34,8 +34,13 @@ import { tooltipBlock } from "../../components/tooltip/index.js";
 import dialog from "../../components/dialog/index.js";
 export default {
   mounted() {
-    dialog({ content: "你是个新手" });
-    tooltipBlock(this.$refs.content2.$el, "内容一");
+    dialog({ content: "你是个新手" }).then(() => {
+      tooltipBlock(this.$refs.content2.$el, {
+        position: "right",
+        content: "内容1",
+      });
+    });
+    this.select(0);
   },
   methods: {
     select(index) {

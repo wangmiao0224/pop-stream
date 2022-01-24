@@ -1,10 +1,6 @@
 <template>
   <div>
-    <el-dialog
-      title="公告"
-      :visible.sync="dialogVisible"
-      width="30%"
-    >
+    <el-dialog title="公告" :visible.sync="dialogVisible" width="30%">
       <div>{{ content }}</div>
       <span slot="footer" class="dialog-footer">
         <el-button @click="cancel">取 消</el-button>
@@ -19,6 +15,7 @@ export default {
   props: {
     _next: null,
     content: null,
+    resolveCB: null,
   },
   data() {
     return {
@@ -27,10 +24,11 @@ export default {
   },
   methods: {
     cancel() {
-      this.dialogVisible = false;
+      this.resolveCB();
       this._next();
     },
-  },
+  }
+ 
 };
 </script>
 

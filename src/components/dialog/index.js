@@ -5,7 +5,7 @@ import { addEventBlock } from "../../common/event-control";
 
 export default function dialogBlock(options) {
   const { content } = options;
-  addEventBlock((next) => {
-    portal(template, { props: { _next: next, content } });
+  return addEventBlock((next) => {
+    return portal(template, { props: { _next: next, content } });
   });
 }
