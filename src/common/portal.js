@@ -35,5 +35,5 @@ export default function (template, options) {
     vm.$destroy();
     portalDom.removeChild(vm.$el);
   });
-  return vm
+  return vm;
 }

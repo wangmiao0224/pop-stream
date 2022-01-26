@@ -15,6 +15,7 @@ export default {
       type: Document,
       default: null,
     },
+    closeBack: null,
     resolveCB: null,
     _next: {
       type: Function,
@@ -33,12 +34,14 @@ export default {
   },
   methods: {
     close() {
+      this.closeBack && this.closeBack();
       this.resolveCB();
       this._next();
     },
   },
   destroyed() {
-    this.close();
+    this.resolveCB();
+    this._next();
   },
 };
 </script>

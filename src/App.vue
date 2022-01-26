@@ -7,7 +7,6 @@
 <script>
 export default {
   name: "App",
- 
 };
 </script>
 
@@ -21,7 +20,6 @@ export default {
   color: #2c3e50;
   width: 100%;
   display: flex;
- 
 }
 * {
   margin: 0;

@@ -1,12 +1,12 @@
 <template>
   <div class="container">
-    <el-button style="height: 30px" ref="preview">预览</el-button>
-    <el-button style="height: 30px" ref="search">搜索</el-button>
+    <el-button id="preview" style="height: 30px" ref="preview">预览</el-button>
+    <el-button id="search" style="height: 30px" ref="search">搜索</el-button>
   </div>
 </template>
 
 <script>
-import { tooltip } from "../../components/tooltip/index.js";
+import store from "../../store/index.js";
 export default {
   data() {
     return {
@@ -21,20 +21,8 @@ export default {
   },
   methods: {
     showTooltip() {
-      if (this.$route.query.first) {
-        tooltip(this.$refs.preview.$el, {
-          position: "bottom",
-          content: "这是预览功能",
-        }).then((res) => {
-          this.tooltip1 = res;
-        });
-        tooltip(this.$refs.search.$el, {
-          position: "bottom",
-          content: "这是搜索功能",
-        }).then((res) => {
-          this.tooltip2 = res;
-        });
-      }
+      store.commit("SHOW_PREVIEW_FIRST", (vm) => (this.tooltip1 = vm));
+      store.commit("SHOW_SEARCH_FIRST", (vm) => (this.tooltip2 = vm));
     },
   },
   destroyed() {

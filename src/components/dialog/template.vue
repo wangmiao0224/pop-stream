@@ -3,7 +3,7 @@
     <el-dialog title="公告" :visible.sync="dialogVisible" width="30%">
       <div>{{ content }}</div>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="cancel">取 消</el-button>
+        <el-button @click="cancelAll">关闭教程</el-button>
         <el-button type="primary" @click="cancel">确 定</el-button>
       </span>
     </el-dialog>
@@ -16,6 +16,7 @@ export default {
     _next: null,
     content: null,
     resolveCB: null,
+    closeAll: null,
   },
   data() {
     return {
@@ -27,8 +28,11 @@ export default {
       this.resolveCB();
       this._next();
     },
-  }
- 
+    cancelAll() {
+      this.closeAll && this.closeAll();
+      this.resolveCB();
+    },
+  },
 };
 </script>
 
