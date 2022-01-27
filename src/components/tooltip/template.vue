@@ -40,8 +40,8 @@ export default {
     },
   },
   destroyed() {
-    this.resolveCB();
     this._next();
+    this.resolveCB();
   },
 };
 </script>
@@ -55,6 +55,7 @@ export default {
   opacity: 0;
 }
 .tooltip {
+  z-index: 888;
   font-size: 10px;
   width: 100px;
   height: 50px;
@@ -92,6 +93,7 @@ export default {
     cursor: pointer;
   }
 }
+
 .right {
   &::after {
     left: -5px;

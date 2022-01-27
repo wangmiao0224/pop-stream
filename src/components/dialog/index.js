@@ -1,21 +1,23 @@
 /* eslint-disable no-unused-vars */
 import template from "./template.vue";
 import portal from "../../common/portal";
-import { event1, destroy } from "../../common/eventManager.js";
+import { event1, close } from "../../common/event/eventManager.js";
 export default function dialogBlock(options) {
-  const { content, key } = options;
+  const { content, key, success } = options;
   if (event1.getEventStatus() && key) {
     event1.removeEvent(key);
   }
-  return event1.addEventBlock((next) => {
-    return portal(template, {
+  const event = (next) => {
+    const vm = portal(template, {
       props: {
         _next: next,
         content,
         closeAll() {
-          destroy(event1);
+          close(event1);
         },
       },
     });
-  }, key);
+    if (typeof success === "function") success(vm);
+  };
+  event1.addEventBlock(event, key);
 }

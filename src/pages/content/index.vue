@@ -4,6 +4,12 @@
     <el-button id="download" style="height: 30px" ref="download"
       >下载</el-button
     >
+    <!-- <el-button
+      id="bottom"
+      style="height: 30px; margin-top: 600px"
+      ref="download"
+      >底部</el-button
+    > -->
   </div>
 </template>
 
@@ -14,6 +20,7 @@ export default {
     return {
       tooltip1: null,
       tooltip2: null,
+      tooltip3: null
     };
   },
   mounted() {
@@ -23,6 +30,10 @@ export default {
   },
   methods: {
     showTooltip() {
+      store.commit("SHOW_BOTTOM_FIRST", (vm) => {
+        console.log(vm);
+        this.tooltip3 = vm;
+      });
       store.commit("SHOW_UPLOAD_FIRST", (vm) => {
         this.tooltip1 = vm;
       });
@@ -34,6 +45,7 @@ export default {
   destroyed() {
     this.tooltip1 && this.tooltip1.$destroy();
     this.tooltip2 && this.tooltip2.$destroy();
+    this.tooltip3 && this.tooltip3.$destroy();
   },
 };
 </script>

@@ -9,12 +9,16 @@ export default {
     showDownloadFirst: true,
     showPreviewFirst: true,
     showSearchFirst: true,
+    showBottomFirst: true,
   },
   mutations: {
     SHOW_DIALOG_FIRST(state) {
       if (state.showDialogFirst) {
-        dialog({ content: "你是个新手" }).then(() => {
-          state.showDialogFirst = false;
+        dialog({
+          content: "你是个新手",
+          closeBack() {
+            state.showDialogFirst = false;
+          },
         });
       }
     },
@@ -23,8 +27,9 @@ export default {
         tooltipBlock("content1", {
           position: "right",
           content: "这里面是上传和下载功能",
-        }).then(() => {
-          state.showLeft1First = false;
+          closeBack() {
+            state.showLeft1First = false;
+          },
         });
       }
     },
@@ -33,8 +38,23 @@ export default {
         tooltipBlock("content2", {
           position: "right",
           content: "这里面是预览和搜索功能",
-        }).then(() => {
-          state.showLeft1First = false;
+          closeBack() {
+            state.showLeft1First = false;
+          },
+        });
+      }
+    },
+    SHOW_BOTTOM_FIRST(state, callback) {
+      if (state.showBottomFirst) {
+        tooltipBlock("bottom", {
+          position: "top",
+          content: "这是底部",
+          success(vm) {
+            callback(vm);
+          },
+          closeBack() {
+            state.showBottomFirst = false;
+          },
         });
       }
     },
@@ -43,12 +63,12 @@ export default {
         tooltip("upload", {
           position: "bottom",
           content: "这是上传按钮",
-          key: "upload",
           closeBack() {
             state.showUploadFirst = false;
           },
-        }).then((vm) => {
-          callback(vm);
+          success(vm) {
+            callback(vm);
+          },
         });
       }
     },
@@ -57,12 +77,12 @@ export default {
         tooltip("download", {
           position: "bottom",
           content: "这是下载按钮",
-          key: "download",
           closeBack() {
             state.showDownloadFirst = false;
           },
-        }).then((vm) => {
-          callback(vm);
+          success(vm) {
+            callback(vm);
+          },
         });
       }
     },
@@ -71,12 +91,12 @@ export default {
         tooltip("preview", {
           position: "bottom",
           content: "这是预览功能",
-          key: "preview",
           closeBack() {
             state.showPreviewFirst = false;
           },
-        }).then((vm) => {
-          callback(vm);
+          success(vm) {
+            callback(vm);
+          },
         });
       }
     },
@@ -85,12 +105,12 @@ export default {
         tooltip("search", {
           position: "bottom",
           content: "这是搜索功能",
-          key: "search",
           closeBack() {
             state.showSearchFirst = false;
           },
-        }).then((vm) => {
-          callback(vm);
+          success(vm) {
+            callback(vm);
+          },
         });
       }
     },
